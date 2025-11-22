@@ -1,0 +1,47 @@
+|-- .gitignore
+|-- .prettierrc
+|-- eslint.config.mjs
+|-- nest-cli.json
+|-- package-lock.json
+|-- package.json
+|-- README.md
+|-- src
+    |-- app.module.ts
+    |-- config
+        |-- app.config.ts
+        |-- database.config.ts
+    |-- main.ts
+    |-- modules
+        |-- channels
+            |-- channels.controller.ts
+            |-- channels.module.ts
+            |-- schemas
+                |-- dashboard-channels.schema.ts
+            |-- services
+                |-- dashboard-channels.service.ts
+        |-- dashboard
+            |-- dashboard.gateway.ts
+            |-- dashboard.module.ts
+        |-- market
+            |-- market.controller.ts
+            |-- market.module.ts
+            |-- schemas
+                |-- dashboard-market.schema.ts
+            |-- services
+                |-- dashboard-market.service.ts
+        |-- sales
+            |-- dto
+                |-- get-sales-chart.dto.ts
+                |-- get-sales-total.dto.ts
+                |-- index.ts
+            |-- sales.controller.ts
+            |-- sales.module.ts
+            |-- schemas
+                |-- dashboard-sales.schema.ts
+            |-- services
+                |-- dashboard-sales.service.ts
+|-- test
+    |-- app.e2e-spec.ts
+    |-- jest-e2e.json
+|-- tsconfig.build.json
+|-- tsconfig.json
