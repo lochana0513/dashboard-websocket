@@ -2,6 +2,9 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { io } from "socket.io-client";
 
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
+const SOCKET_URL = import.meta.env.VITE_SOCKET_URL || `${API_URL}/dashboard`;
+
 // Mapping iconKey to SVGs
 const icons = {
   github: (
@@ -48,7 +51,7 @@ function DashboardCard07() {
   useEffect(() => {
       const fetchChannels = async () => {
         try {
-          const res = await axios.get("http://localhost:3000/channels");
+          const res = await axios.get(`${API_URL}/channels`);
           setRows(res.data);
         } catch (err) {
           console.error("Failed to fetch channels", err);
@@ -59,7 +62,7 @@ function DashboardCard07() {
 
     // WebSocket updates
   useEffect(() => {
-    const socket = io("http://localhost:3000/dashboard");
+    const socket = io(SOCKET_URL);
 
     socket.on("channels:update", (data) => {
       setRows((prevRows) =>

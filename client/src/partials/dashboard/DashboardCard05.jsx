@@ -4,6 +4,9 @@ import RealtimeChart from '../../charts/RealtimeChart';
 import { adjustColorOpacity, getCssVariable } from '../../utils/Utils';
 import { io } from 'socket.io-client';
 
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
+const SOCKET_URL = import.meta.env.VITE_SOCKET_URL || `${API_URL}/dashboard`;
+
 function DashboardCard05() {
   const [slicedData, setSlicedData] = useState([]);
   const [slicedLabels, setSlicedLabels] = useState([]);
@@ -11,7 +14,7 @@ function DashboardCard05() {
 
   useEffect(() => {
     // Connect to WebSocket
-    socketRef.current = io('http://localhost:3000/dashboard'); // replace with your WS URL
+    socketRef.current = io(SOCKET_URL);
 
     // Listen to market updates
     socketRef.current.on('market:update', (latest) => {

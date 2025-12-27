@@ -5,6 +5,9 @@ import { adjustColorOpacity, getCssVariable } from '../../utils/Utils';
 import axios from 'axios';
 import { io } from 'socket.io-client';
 
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
+const SOCKET_URL = import.meta.env.VITE_SOCKET_URL || `${API_URL}/dashboard`;
+
 function DashboardCard01() {
   const [labels, setLabels] = useState([]);
   const [thisYear, setThisYear] = useState([]);
@@ -15,7 +18,7 @@ function DashboardCard01() {
   useEffect(() => {
     async function fetchMonthlyData() {
       try {
-        const res = await axios.get('http://localhost:3000/sales/monthly-chart', {
+        const res = await axios.get(`${API_URL}/sales/monthly-chart`, {
           params: { productType: 'AcmePlus' },
         });
 
@@ -34,7 +37,7 @@ function DashboardCard01() {
   useEffect(() => {
     async function fetchTotalSales() {
       try {
-        const res = await axios.get('http://localhost:3000/sales/total', {
+        const res = await axios.get(`${API_URL}/sales/total`, {
           params: { productType: 'AcmePlus' },
         });
 
@@ -48,7 +51,7 @@ function DashboardCard01() {
   }, []);
 
   useEffect(() => {
-    const socket = io('http://localhost:3000/dashboard');
+    const socket = io(SOCKET_URL);
 
     socket.on('sales:total:AcmePlus', (data) => {
       // Backend emits either a number or { total: number }
